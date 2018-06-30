@@ -29,7 +29,7 @@ common:
 	# include search paths, this will be usually parsed from the file system
 	# but if the addon or addon libraries need special search paths they can be
 	# specified here separated by spaces or one per line using +=
-	ADDON_INCLUDES += src
+	#ADDON_INCLUDES += src
 	
 	# any special flag that should be passed to the compiler when using this
 	# addon
@@ -41,7 +41,7 @@ common:
 	
 	# linux only, any library that should be included in the project using
 	# pkg-config
-	ADDON_PKG_CONFIG_LIBRARIES = python
+	#ADDON_PKG_CONFIG_LIBRARIES = python
 	
 	# osx/iOS only, any framework that should be included in the project
 	# ADDON_FRAMEWORKS =
@@ -54,64 +54,64 @@ common:
 	
 	# some addons need resources to be copied to the bin/data folder of the project
 	# specify here any files that need to be copied, you can use wildcards like * and ?
-	ADDON_DATA = lib/openframeworks.py
-	ADDON_DATA += lib/openframeworks_extra.py
+	#ADDON_DATA = lib/openframeworks.py
+	#ADDON_DATA += lib/openframeworks_extra.py
 	
 	# when parsing the file system looking for libraries exclude this for all or
 	# a specific platform
 	# ADDON_LIBS_EXCLUDE =
 	
 linux64:
-	ADDON_DATA = lib/openframeworks.py
-	ADDON_DATA += lib/openframeworks_extra.py
-	ADDON_CFLAGS += -I/usr/include/python2.7
-	ADDON_LDFLAGS += -lpython2.7
-    ADDON_SOURCES_EXCLUDE += src/bindings/linuxarm/%
-    ADDON_INCLUDES_EXCLUDE += src/bindings/linuxarm/%
+	#ADDON_DATA = lib/openframeworks.py
+	#ADDON_DATA += lib/openframeworks_extra.py
+	#ADDON_CFLAGS += -I/usr/include/python2.7
+	#ADDON_LDFLAGS += -lpython2.7
+    #ADDON_SOURCES_EXCLUDE += src/bindings/linuxarm/%
+    #ADDON_INCLUDES_EXCLUDE += src/bindings/linuxarm/%
 
 linux:
-	ADDON_DATA = lib/openframeworks.py
-	ADDON_DATA += lib/openframeworks_extra.py
-	ADDON_CFLAGS += -I/usr/include/python2.7
-	ADDON_LDFLAGS += -lpython2.7
-    ADDON_SOURCES_EXCLUDE += src/bindings/linuxarm/%
-    ADDON_INCLUDES_EXCLUDE += src/bindings/linuxarm/%
+	#ADDON_DATA = lib/openframeworks.py
+	#ADDON_DATA += lib/openframeworks_extra.py
+	#ADDON_CFLAGS += -I/usr/include/python2.7
+	#ADDON_LDFLAGS += -lpython2.7
+    #ADDON_SOURCES_EXCLUDE += src/bindings/linuxarm/%
+    #ADDON_INCLUDES_EXCLUDE += src/bindings/linuxarm/%
 
 linuxarmv6l:
-    ADDON_DATA = lib/openframeworks.py
-    ADDON_DATA += lib/openframeworks_extra.py
-    ADDON_CFLAGS += -I/usr/include/python2.7
-    ADDON_LDFLAGS += -lpython2.7
-    ADDON_SOURCES_EXCLUDE += src/bindings/desktop/%
-    ADDON_INCLUDES_EXCLUDE += src/bindings/desktop/%
-    ADDON_LIBS_EXCLUDE += libs
+    #ADDON_DATA = lib/openframeworks.py
+    #ADDON_DATA += lib/openframeworks_extra.py
+    #ADDON_CFLAGS += -I/usr/include/python2.7
+    #ADDON_LDFLAGS += -lpython2.7
+    #ADDON_SOURCES_EXCLUDE += src/bindings/desktop/%
+    #ADDON_INCLUDES_EXCLUDE += src/bindings/desktop/%
+    #ADDON_LIBS_EXCLUDE += libs
 
 linuxarmv7l:
-    ADDON_DATA = lib/openframeworks.py
-    ADDON_DATA += lib/openframeworks_extra.py
-    ADDON_CFLAGS += -I/usr/include/python2.7
-    ADDON_LDFLAGS += -lpython2.7
-    ADDON_SOURCES_EXCLUDE += src/bindings/desktop/%
-    ADDON_INCLUDES_EXCLUDE += src/bindings/desktop/%
-    ADDON_LIBS_EXCLUDE += libs
+    #ADDON_DATA = lib/openframeworks.py
+    #ADDON_DATA += lib/openframeworks_extra.py
+    #ADDON_CFLAGS += -I/usr/include/python2.7
+    #ADDON_LDFLAGS += -lpython2.7
+    #ADDON_SOURCES_EXCLUDE += src/bindings/desktop/%
+    #ADDON_INCLUDES_EXCLUDE += src/bindings/desktop/%
+    #ADDON_LIBS_EXCLUDE += libs
 
 win_cb:
-	ADDON_SOURCES += src/ofxPython.cpp src/ofxPythonCallBack.cpp
-	ADDON_SOURCES += src/bindings/desktop/openFrameworks_wrap.cpp
-	ADDON_SOURCES += src/bindings/openFrameworks_extra_wrap.cpp
-	ADDON_DATA = lib/openframeworks.py
-	ADDON_DATA += lib/openframeworks_extra.py
-	ADDON_CFLAGS += -IC:/Python27/include
-	ADDON_LDFLAGS += -LC:/Python27/libs -lpython
-    ADDON_SOURCES_EXCLUDE += src/bindings/linuxarm/%
-    ADDON_INCLUDES_EXCLUDE += src/bindings/linuxarm/%
+	#ADDON_SOURCES += src/ofxPython.cpp src/ofxPythonCallBack.cpp
+	#ADDON_SOURCES += src/bindings/desktop/openFrameworks_wrap.cpp
+	#ADDON_SOURCES += src/bindings/openFrameworks_extra_wrap.cpp
+	#ADDON_DATA = lib/openframeworks.py
+	#ADDON_DATA += lib/openframeworks_extra.py
+	#ADDON_CFLAGS += -IC:/Python27/include
+	#ADDON_LDFLAGS += -LC:/Python27/libs -lpython
+    #ADDON_SOURCES_EXCLUDE += src/bindings/linuxarm/%
+    #ADDON_INCLUDES_EXCLUDE += src/bindings/linuxarm/%
 
 android/armeabi:
 	
 android/armeabi-v7a:	
 
 osx:
-	ADDON_CFLAGS += -I/System/Library/Frameworks/Python.framework/Versions/2.7/include/python2.7
-	ADDON_LDFLAGS += -lpython2.7 -L/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/config
-    ADDON_SOURCES_EXCLUDE += src/bindings/linuxarm/%
-    ADDON_INCLUDES_EXCLUDE += src/bindings/linuxarm/%
+	#ADDON_CFLAGS += -I/System/Library/Frameworks/Python.framework/Versions/2.7/include/python2.7
+	#ADDON_LDFLAGS += -lpython2.7 -L/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/config
+    #ADDON_SOURCES_EXCLUDE += src/bindings/linuxarm/%
+    #ADDON_INCLUDES_EXCLUDE += src/bindings/linuxarm/%

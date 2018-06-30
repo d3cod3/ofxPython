@@ -1,8 +1,5 @@
 #test
-import random
 from openframeworks import *
-
-print "LOL"
 
 class myApp(object):
 	color = (255,255,255)
@@ -12,10 +9,11 @@ class myApp(object):
 		self.d = 10
 	
 	def update(self):
-		self.x += random.random()-.5
-		self.y += random.random()-.5
+		self.x = ofRandom(100)
+		self.y = ofRandom(100)
 
 	def draw(self):
+		ofBackground(0,0,0)
 		color = ofColor(*self.color)
 		ofSetColor(color)
 		ofDrawCircle(self.x,self.y,self.d)

@@ -5,6 +5,8 @@ extern "C"{
 #include <Python.h>
 }
 
+#include "ofMain.h"
+
 #include <map>
 
 class ofxPythonMappingValue;

@@ -1,9 +1,10 @@
-#include "ofxPython.h"
 #include "ofMain.h"
 
+#include "ofxPython.h"
+
+
 extern "C"{
-void init_openframeworks();
-void init_openframeworks_extra();
+    void init_openframeworks();
 }
 
 unsigned int ofxPython::instances = 0;
@@ -43,7 +44,7 @@ ofxPythonObject make_object_owned(PyObject * obj, bool errcheck= true)
 {
 	ofxPythonOperation op;
 	if (obj==nullptr)
-		ofLog()<< "WARNING! make_object_owned: creating ofxPythonObject with nullptr"; 
+		ofLog()<< "WARNING! make_object_owned: creating ofxPythonObject with nullptr";
 	if(errcheck)
 		PythonErrorCheck();
 	ofxPythonObject o;
@@ -55,7 +56,7 @@ ofxPythonObject make_object_borrowed(PyObject * obj, bool errcheck= true)
 {
 	ofxPythonOperation op;
 	if (obj==nullptr)
-		ofLog()<< "WARNING! make_object_borrowed: creating ofxPythonObject with nullptr"; 
+		ofLog()<< "WARNING! make_object_borrowed: creating ofxPythonObject with nullptr";
 	if(errcheck)
 		PythonErrorCheck();
 	ofxPythonObject o;
@@ -67,8 +68,7 @@ ofxPythonObject make_object_borrowed(PyObject * obj, bool errcheck= true)
 class noconststring: vector<char>
 {
 public:
-	noconststring(const string& source)
-	:vector<char>(source.c_str(), source.c_str() + source.size() + 1u)
+	noconststring(const string& source):vector<char>(source.c_str(), source.c_str() + source.size() + 1u)
 	{}
 	operator char *()
 	{
@@ -103,45 +103,20 @@ ofxPython::~ofxPython()
                 }
             }
             PyEval_RestoreThread(ofxPythonOperation::pstate);
-            
+
 			Py_Finalize();
 		}
 	}
 }
 
-int ofxPython::init()
-{
-	if (!initialized)
-	{
+int ofxPython::init(){
+	if (!initialized){
 		initialized = true;
-		if(instances == 0)
-		{
+		if(instances == 0){
             PyEval_InitThreads();
 			Py_Initialize();
-			init_openframeworks();
-			init_openframeworks_extra();
-			//this seems to be the easiest way to add '.' to python path
-            
-			PyRun_SimpleString(
-				"import sys\n"
-				"class StdoutCatcher:\n"
-				"	#this class redirect stdout to ofLog()\n"
-				"	def __init__(self):\n"
-				"		self.message = []\n"
-				"	def write(self,s):\n"
-				"		from openframeworks import ofLog, OF_LOG_NOTICE\n"
-				"		if s.endswith('\\n'):\n"
-				"			self.message.append(s[:-1])\n"
-				"			ofLog(OF_LOG_NOTICE,''.join(self.message))\n"
-				"			self.message = []\n"
-				"		else:\n"
-				"			self.message.append(s)\n"
-                "	def flush(self):\n"
-                "		pass\n"
-				"catcher = StdoutCatcher()\n"
-				"sys.stdout = catcher\n"
-                "sys.stderr = catcher\n"
-				);
+            init_openframeworks();
+
             ofxPythonOperation::pstate = PyEval_SaveThread();
             PythonErrorCheck();
             reset();
@@ -153,10 +128,8 @@ int ofxPython::init()
 	return instances;
 }
 
-void ofxPython::reset()
-{
+void ofxPython::reset(){
     ofxPythonOperation op;
-	// globals = make_object_owned(PyDict_New());
 	locals = make_object_owned(PyDict_New());
     //deal with cyclic references
     ofxPython::getObject("collect", "gc")();
@@ -164,34 +137,29 @@ void ofxPython::reset()
 	locals["__builtins__"]=make_object_borrowed(PyEval_GetBuiltins());
 }
 
-void ofxPython::executeScript(const string& path)
-{
+void ofxPython::executeScript(const string& path){
 	ofxPythonOperation op;
 	executeString(ofBufferFromFile(path).getText());
 	PythonErrorCheck();
 }
 
-void ofxPython::executeString(const string& script)
-{
+void ofxPython::executeString(const string& script){
 	ofxPythonOperation op;
 	make_object_owned(PyRun_String(script.c_str(),Py_file_input,locals.data->obj,locals.data->obj));
 	PythonErrorCheck();
 }
 
-ofxPythonObject ofxPython::executeStatement(const string& script)
-{
+ofxPythonObject ofxPython::executeStatement(const string& script){
 	ofxPythonOperation op;
     return make_object_owned(PyRun_String(script.c_str(),Py_single_input,locals.data->obj,locals.data->obj));
 }
 
-ofxPythonObject ofxPython::evalString(const string& expression)
-{
+ofxPythonObject ofxPython::evalString(const string& expression){
 	ofxPythonOperation op;
 	return  make_object_owned(PyRun_String(expression.c_str(),Py_eval_input,locals.data->obj,locals.data->obj));
 }
 
-ofxPythonObject ofxPython::getObject(const string& name, const string& module)
-{
+ofxPythonObject ofxPython::getObject(const string& name, const string& module){
 	ofxPythonOperation op;
 
 	ofxPythonObject pmodule = make_object_owned(
@@ -201,20 +169,17 @@ ofxPythonObject ofxPython::getObject(const string& name, const string& module)
 	return ofxPythonObject();
 }
 
-ofxPythonObject ofxPython::getObject(const string& name)
-{
+ofxPythonObject ofxPython::getObject(const string& name){
 	ofxPythonOperation op;
 	return locals[name];
 }
 
-ofxPythonObject ofxPython::getObjectOrNone(const string& name)
-{
+ofxPythonObject ofxPython::getObjectOrNone(const string& name){
 	ofxPythonOperation op;
 	return locals.attr("get")(ofxPythonObject::fromString(name));
 }
 
-void ofxPython::setObject(const string& name, ofxPythonObject o)
-{
+void ofxPython::setObject(const string& name, ofxPythonObject o){
 	ofxPythonOperation op;
 	locals[name]=o;
 }
@@ -244,24 +209,20 @@ void ofxPython::addPath(const string & path){
                   );
 }
 
-void ofxPythonObject::insert_owned(PyObject * obj)
-{
+void ofxPythonObject::insert_owned(PyObject * obj){
 	data.reset(new ofxPythonObjectManaged(obj));
 }
 
-void ofxPythonObject::insert_borrowed(PyObject * obj)
-{
+void ofxPythonObject::insert_borrowed(PyObject * obj){
 	ofxPythonOperation op;
 	Py_XINCREF(obj);
 	data.reset(new ofxPythonObjectManaged(obj));
 }
 
-ofxPythonObject::ofxPythonObjectManaged::ofxPythonObjectManaged(PyObject * o):obj(o)
-{
+ofxPythonObject::ofxPythonObjectManaged::ofxPythonObjectManaged(PyObject * o):obj(o){
 
 }
-ofxPythonObject::ofxPythonObjectManaged::~ofxPythonObjectManaged()
-{
+ofxPythonObject::ofxPythonObjectManaged::~ofxPythonObjectManaged(){
     if(ofxPython::instances > 0){
         ofxPythonOperation op;
         Py_XDECREF(obj);
