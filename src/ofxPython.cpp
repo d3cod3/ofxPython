@@ -2,7 +2,6 @@
 
 #include "ofxPython.h"
 
-
 extern "C"{
     void init_openframeworks();
 }
@@ -12,8 +11,7 @@ unsigned int ofxPython::instances = 0;
 ofxPythonObject make_object_owned(PyObject * obj, bool errcheck);
 
 
-void PythonErrorCheck()
-{
+void PythonErrorCheck(){
 	ofxPythonOperation op;
 	PyObject * ptype, * pvalue, * ptraceback;
 	PyErr_Fetch(&ptype, &pvalue, &ptraceback);
@@ -24,14 +22,11 @@ void PythonErrorCheck()
 		ofxPythonObject opvalue = make_object_owned(pvalue, false);
 		ofxPythonObject optraceback = make_object_owned(ptraceback, false);
 		ofLog() << "Python Error: ";
-		if(optraceback)
-		{
+		if(optraceback){
 			vector<ofxPythonObject> tb = ofxPython::getObject("format_tb","traceback")(optraceback).asVector();
-			for(unsigned int i = 0; i < tb.size(); ++i)
-			{
+			for(unsigned int i = 0; i < tb.size(); ++i){
 				vector<ofxPythonObject> lines = tb[i].attr("splitlines")().asVector();
-				for (unsigned int j=0; j < lines.size(); ++j)
-				{
+				for (unsigned int j=0; j < lines.size(); ++j){
 					ofLog() << lines[j].asString();
 				}
 			}
