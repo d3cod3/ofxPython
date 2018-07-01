@@ -158,15 +158,6 @@ SwigPyIterator_swigregister = _openframeworks.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
 
-
-# handle typedefs which swig doesn't wrap
-ofPoint = ofVec3f
-
-# renaming log -> ofLog
-ofLog = log
-del log
-
-
 class IntVector(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
@@ -2594,6 +2585,76 @@ class ofEasyCam(ofCamera):
 ofEasyCam_swigregister = _openframeworks.ofEasyCam_swigregister
 ofEasyCam_swigregister(ofEasyCam)
 
+OF_MESH_POINTS = _openframeworks.OF_MESH_POINTS
+OF_MESH_WIREFRAME = _openframeworks.OF_MESH_WIREFRAME
+OF_MESH_FILL = _openframeworks.OF_MESH_FILL
+OF_PRIMITIVE_TRIANGLES = _openframeworks.OF_PRIMITIVE_TRIANGLES
+OF_PRIMITIVE_TRIANGLE_STRIP = _openframeworks.OF_PRIMITIVE_TRIANGLE_STRIP
+OF_PRIMITIVE_TRIANGLE_FAN = _openframeworks.OF_PRIMITIVE_TRIANGLE_FAN
+OF_PRIMITIVE_LINES = _openframeworks.OF_PRIMITIVE_LINES
+OF_PRIMITIVE_LINE_STRIP = _openframeworks.OF_PRIMITIVE_LINE_STRIP
+OF_PRIMITIVE_LINE_LOOP = _openframeworks.OF_PRIMITIVE_LINE_LOOP
+OF_PRIMITIVE_POINTS = _openframeworks.OF_PRIMITIVE_POINTS
+OF_OUTLINE = _openframeworks.OF_OUTLINE
+OF_FILLED = _openframeworks.OF_FILLED
+OF_MAX_STYLE_HISTORY = _openframeworks.OF_MAX_STYLE_HISTORY
+OF_MAX_VIEWPORT_HISTORY = _openframeworks.OF_MAX_VIEWPORT_HISTORY
+OF_MAX_CIRCLE_PTS = _openframeworks.OF_MAX_CIRCLE_PTS
+OF_BLENDMODE_DISABLED = _openframeworks.OF_BLENDMODE_DISABLED
+OF_BLENDMODE_ALPHA = _openframeworks.OF_BLENDMODE_ALPHA
+OF_BLENDMODE_ADD = _openframeworks.OF_BLENDMODE_ADD
+OF_BLENDMODE_SUBTRACT = _openframeworks.OF_BLENDMODE_SUBTRACT
+OF_BLENDMODE_MULTIPLY = _openframeworks.OF_BLENDMODE_MULTIPLY
+OF_BLENDMODE_SCREEN = _openframeworks.OF_BLENDMODE_SCREEN
+OF_GRADIENT_LINEAR = _openframeworks.OF_GRADIENT_LINEAR
+OF_GRADIENT_CIRCULAR = _openframeworks.OF_GRADIENT_CIRCULAR
+OF_GRADIENT_BAR = _openframeworks.OF_GRADIENT_BAR
+OF_POLY_WINDING_ODD = _openframeworks.OF_POLY_WINDING_ODD
+OF_POLY_WINDING_NONZERO = _openframeworks.OF_POLY_WINDING_NONZERO
+OF_POLY_WINDING_POSITIVE = _openframeworks.OF_POLY_WINDING_POSITIVE
+OF_POLY_WINDING_NEGATIVE = _openframeworks.OF_POLY_WINDING_NEGATIVE
+OF_POLY_WINDING_ABS_GEQ_TWO = _openframeworks.OF_POLY_WINDING_ABS_GEQ_TWO
+OF_LEFT_HANDED = _openframeworks.OF_LEFT_HANDED
+OF_RIGHT_HANDED = _openframeworks.OF_RIGHT_HANDED
+OF_MATRIX_MODELVIEW = _openframeworks.OF_MATRIX_MODELVIEW
+OF_MATRIX_PROJECTION = _openframeworks.OF_MATRIX_PROJECTION
+OF_MATRIX_TEXTURE = _openframeworks.OF_MATRIX_TEXTURE
+OF_BITMAPMODE_SIMPLE = _openframeworks.OF_BITMAPMODE_SIMPLE
+OF_BITMAPMODE_SCREEN = _openframeworks.OF_BITMAPMODE_SCREEN
+OF_BITMAPMODE_VIEWPORT = _openframeworks.OF_BITMAPMODE_VIEWPORT
+OF_BITMAPMODE_MODEL = _openframeworks.OF_BITMAPMODE_MODEL
+OF_BITMAPMODE_MODEL_BILLBOARD = _openframeworks.OF_BITMAPMODE_MODEL_BILLBOARD
+OF_RECTMODE_CORNER = _openframeworks.OF_RECTMODE_CORNER
+OF_RECTMODE_CENTER = _openframeworks.OF_RECTMODE_CENTER
+OF_IMAGE_GRAYSCALE = _openframeworks.OF_IMAGE_GRAYSCALE
+OF_IMAGE_COLOR = _openframeworks.OF_IMAGE_COLOR
+OF_IMAGE_COLOR_ALPHA = _openframeworks.OF_IMAGE_COLOR_ALPHA
+OF_IMAGE_UNDEFINED = _openframeworks.OF_IMAGE_UNDEFINED
+OF_INTERPOLATE_NEAREST_NEIGHBOR = _openframeworks.OF_INTERPOLATE_NEAREST_NEIGHBOR
+OF_INTERPOLATE_BILINEAR = _openframeworks.OF_INTERPOLATE_BILINEAR
+OF_INTERPOLATE_BICUBIC = _openframeworks.OF_INTERPOLATE_BICUBIC
+OF_PIXELS_GRAY = _openframeworks.OF_PIXELS_GRAY
+OF_PIXELS_GRAY_ALPHA = _openframeworks.OF_PIXELS_GRAY_ALPHA
+OF_PIXELS_RGB = _openframeworks.OF_PIXELS_RGB
+OF_PIXELS_BGR = _openframeworks.OF_PIXELS_BGR
+OF_PIXELS_RGBA = _openframeworks.OF_PIXELS_RGBA
+OF_PIXELS_BGRA = _openframeworks.OF_PIXELS_BGRA
+OF_PIXELS_RGB565 = _openframeworks.OF_PIXELS_RGB565
+OF_PIXELS_NV12 = _openframeworks.OF_PIXELS_NV12
+OF_PIXELS_NV21 = _openframeworks.OF_PIXELS_NV21
+OF_PIXELS_YV12 = _openframeworks.OF_PIXELS_YV12
+OF_PIXELS_I420 = _openframeworks.OF_PIXELS_I420
+OF_PIXELS_YUY2 = _openframeworks.OF_PIXELS_YUY2
+OF_PIXELS_UYVY = _openframeworks.OF_PIXELS_UYVY
+OF_PIXELS_Y = _openframeworks.OF_PIXELS_Y
+OF_PIXELS_U = _openframeworks.OF_PIXELS_U
+OF_PIXELS_V = _openframeworks.OF_PIXELS_V
+OF_PIXELS_UV = _openframeworks.OF_PIXELS_UV
+OF_PIXELS_VU = _openframeworks.OF_PIXELS_VU
+OF_PIXELS_NUM_FORMATS = _openframeworks.OF_PIXELS_NUM_FORMATS
+OF_PIXELS_UNKNOWN = _openframeworks.OF_PIXELS_UNKNOWN
+OF_PIXELS_NATIVE = _openframeworks.OF_PIXELS_NATIVE
+
 class ofMesh(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
@@ -4935,6 +4996,9 @@ def ofVec3f_one():
     return _openframeworks.ofVec3f_one()
 ofVec3f_one = _openframeworks.ofVec3f_one
 
+# handle typedefs which swig doesn't wrap
+ofPoint = ofVec3f
+
 class ofVec4f(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
@@ -5973,75 +6037,6 @@ class ofVboMesh(ofMesh):
 ofVboMesh_swigregister = _openframeworks.ofVboMesh_swigregister
 ofVboMesh_swigregister(ofVboMesh)
 
-OF_MESH_POINTS = _openframeworks.OF_MESH_POINTS
-OF_MESH_WIREFRAME = _openframeworks.OF_MESH_WIREFRAME
-OF_MESH_FILL = _openframeworks.OF_MESH_FILL
-OF_PRIMITIVE_TRIANGLES = _openframeworks.OF_PRIMITIVE_TRIANGLES
-OF_PRIMITIVE_TRIANGLE_STRIP = _openframeworks.OF_PRIMITIVE_TRIANGLE_STRIP
-OF_PRIMITIVE_TRIANGLE_FAN = _openframeworks.OF_PRIMITIVE_TRIANGLE_FAN
-OF_PRIMITIVE_LINES = _openframeworks.OF_PRIMITIVE_LINES
-OF_PRIMITIVE_LINE_STRIP = _openframeworks.OF_PRIMITIVE_LINE_STRIP
-OF_PRIMITIVE_LINE_LOOP = _openframeworks.OF_PRIMITIVE_LINE_LOOP
-OF_PRIMITIVE_POINTS = _openframeworks.OF_PRIMITIVE_POINTS
-OF_OUTLINE = _openframeworks.OF_OUTLINE
-OF_FILLED = _openframeworks.OF_FILLED
-OF_MAX_STYLE_HISTORY = _openframeworks.OF_MAX_STYLE_HISTORY
-OF_MAX_VIEWPORT_HISTORY = _openframeworks.OF_MAX_VIEWPORT_HISTORY
-OF_MAX_CIRCLE_PTS = _openframeworks.OF_MAX_CIRCLE_PTS
-OF_BLENDMODE_DISABLED = _openframeworks.OF_BLENDMODE_DISABLED
-OF_BLENDMODE_ALPHA = _openframeworks.OF_BLENDMODE_ALPHA
-OF_BLENDMODE_ADD = _openframeworks.OF_BLENDMODE_ADD
-OF_BLENDMODE_SUBTRACT = _openframeworks.OF_BLENDMODE_SUBTRACT
-OF_BLENDMODE_MULTIPLY = _openframeworks.OF_BLENDMODE_MULTIPLY
-OF_BLENDMODE_SCREEN = _openframeworks.OF_BLENDMODE_SCREEN
-OF_GRADIENT_LINEAR = _openframeworks.OF_GRADIENT_LINEAR
-OF_GRADIENT_CIRCULAR = _openframeworks.OF_GRADIENT_CIRCULAR
-OF_GRADIENT_BAR = _openframeworks.OF_GRADIENT_BAR
-OF_POLY_WINDING_ODD = _openframeworks.OF_POLY_WINDING_ODD
-OF_POLY_WINDING_NONZERO = _openframeworks.OF_POLY_WINDING_NONZERO
-OF_POLY_WINDING_POSITIVE = _openframeworks.OF_POLY_WINDING_POSITIVE
-OF_POLY_WINDING_NEGATIVE = _openframeworks.OF_POLY_WINDING_NEGATIVE
-OF_POLY_WINDING_ABS_GEQ_TWO = _openframeworks.OF_POLY_WINDING_ABS_GEQ_TWO
-OF_LEFT_HANDED = _openframeworks.OF_LEFT_HANDED
-OF_RIGHT_HANDED = _openframeworks.OF_RIGHT_HANDED
-OF_MATRIX_MODELVIEW = _openframeworks.OF_MATRIX_MODELVIEW
-OF_MATRIX_PROJECTION = _openframeworks.OF_MATRIX_PROJECTION
-OF_MATRIX_TEXTURE = _openframeworks.OF_MATRIX_TEXTURE
-OF_BITMAPMODE_SIMPLE = _openframeworks.OF_BITMAPMODE_SIMPLE
-OF_BITMAPMODE_SCREEN = _openframeworks.OF_BITMAPMODE_SCREEN
-OF_BITMAPMODE_VIEWPORT = _openframeworks.OF_BITMAPMODE_VIEWPORT
-OF_BITMAPMODE_MODEL = _openframeworks.OF_BITMAPMODE_MODEL
-OF_BITMAPMODE_MODEL_BILLBOARD = _openframeworks.OF_BITMAPMODE_MODEL_BILLBOARD
-OF_RECTMODE_CORNER = _openframeworks.OF_RECTMODE_CORNER
-OF_RECTMODE_CENTER = _openframeworks.OF_RECTMODE_CENTER
-OF_IMAGE_GRAYSCALE = _openframeworks.OF_IMAGE_GRAYSCALE
-OF_IMAGE_COLOR = _openframeworks.OF_IMAGE_COLOR
-OF_IMAGE_COLOR_ALPHA = _openframeworks.OF_IMAGE_COLOR_ALPHA
-OF_IMAGE_UNDEFINED = _openframeworks.OF_IMAGE_UNDEFINED
-OF_INTERPOLATE_NEAREST_NEIGHBOR = _openframeworks.OF_INTERPOLATE_NEAREST_NEIGHBOR
-OF_INTERPOLATE_BILINEAR = _openframeworks.OF_INTERPOLATE_BILINEAR
-OF_INTERPOLATE_BICUBIC = _openframeworks.OF_INTERPOLATE_BICUBIC
-OF_PIXELS_GRAY = _openframeworks.OF_PIXELS_GRAY
-OF_PIXELS_GRAY_ALPHA = _openframeworks.OF_PIXELS_GRAY_ALPHA
-OF_PIXELS_RGB = _openframeworks.OF_PIXELS_RGB
-OF_PIXELS_BGR = _openframeworks.OF_PIXELS_BGR
-OF_PIXELS_RGBA = _openframeworks.OF_PIXELS_RGBA
-OF_PIXELS_BGRA = _openframeworks.OF_PIXELS_BGRA
-OF_PIXELS_RGB565 = _openframeworks.OF_PIXELS_RGB565
-OF_PIXELS_NV12 = _openframeworks.OF_PIXELS_NV12
-OF_PIXELS_NV21 = _openframeworks.OF_PIXELS_NV21
-OF_PIXELS_YV12 = _openframeworks.OF_PIXELS_YV12
-OF_PIXELS_I420 = _openframeworks.OF_PIXELS_I420
-OF_PIXELS_YUY2 = _openframeworks.OF_PIXELS_YUY2
-OF_PIXELS_UYVY = _openframeworks.OF_PIXELS_UYVY
-OF_PIXELS_Y = _openframeworks.OF_PIXELS_Y
-OF_PIXELS_U = _openframeworks.OF_PIXELS_U
-OF_PIXELS_V = _openframeworks.OF_PIXELS_V
-OF_PIXELS_UV = _openframeworks.OF_PIXELS_UV
-OF_PIXELS_VU = _openframeworks.OF_PIXELS_VU
-OF_PIXELS_NUM_FORMATS = _openframeworks.OF_PIXELS_NUM_FORMATS
-OF_PIXELS_UNKNOWN = _openframeworks.OF_PIXELS_UNKNOWN
-OF_PIXELS_NATIVE = _openframeworks.OF_PIXELS_NATIVE
 class ofPixels(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
