@@ -23,6 +23,7 @@ public:
 	ofxPythonObject operator ()(ofxPythonObject); //call objects 1 argument
 	ofxPythonObject operator ()(ofxPythonObject, ofxPythonObject); //call objects 2 arguments
 	ofxPythonObject operator ()(ofxPythonObject, ofxPythonObject, ofxPythonObject); //call objects 3 arguments
+    ofxPythonObject operator ()(ofxPythonObject, ofxPythonObject, ofxPythonObject, ofxPythonObject); //call objects 4 arguments
 	ofxPythonAttrValue attr(const string& attribute);
 	ofxPythonMappingValue operator [](const string& key);
 	ofxPythonMappingValue operator [](const char * key);
@@ -118,6 +119,7 @@ public:
 	ofxPythonObject operator ()(ofxPythonObject); //call objects 1 argument
 	ofxPythonObject operator ()(ofxPythonObject, ofxPythonObject); //call objects 2 arguments
 	ofxPythonObject operator ()(ofxPythonObject, ofxPythonObject, ofxPythonObject); //call objects 3 arguments
+    ofxPythonObject operator ()(ofxPythonObject, ofxPythonObject, ofxPythonObject, ofxPythonObject); //call objects 4 arguments
 	ofxPythonAttrValue attr(const string& attribute);
 	ofxPythonMappingValue operator [](const string& key);
 	ofxPythonMappingValue operator [](const char * key);
