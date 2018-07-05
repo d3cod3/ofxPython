@@ -66,26 +66,30 @@ linux64:
 	ADDON_LDFLAGS += -lpython2.7
 	ADDON_SOURCES_EXCLUDE += src/bindings/ios/% src/bindings/linuxarm/%
 	ADDON_INCLUDES_EXCLUDE += src/bindings/ios/% src/bindings/linuxarm/%
+	ADDON_PKG_CONFIG_LIBRARIES = python
 
 linux:
 	ADDON_CFLAGS += -I/usr/include/python2.7
 	ADDON_LDFLAGS += -lpython2.7
 	ADDON_SOURCES_EXCLUDE += src/bindings/ios/% src/bindings/linuxarm/%
 	ADDON_INCLUDES_EXCLUDE += src/bindings/ios/% src/bindings/linuxarm/%
+	ADDON_PKG_CONFIG_LIBRARIES = python
 
 linuxarmv6l:
 	ADDON_CFLAGS += -I/usr/include/python2.7
-        ADDON_LDFLAGS += -lpython2.7
-        ADDON_SOURCES_EXCLUDE += src/bindings/desktop/% src/bindings/ios/%
-        ADDON_INCLUDES_EXCLUDE += src/bindings/desktop/% src/bindings/ios/%
-        ADDON_LIBS_EXCLUDE += libs
+	ADDON_LDFLAGS += -lpython2.7
+	ADDON_SOURCES_EXCLUDE += src/bindings/desktop/% src/bindings/ios/%
+	ADDON_INCLUDES_EXCLUDE += src/bindings/desktop/% src/bindings/ios/%
+	ADDON_LIBS_EXCLUDE += libs
+	ADDON_PKG_CONFIG_LIBRARIES = python
 
 linuxarmv7l:
-        ADDON_CFLAGS += -I/usr/include/python2.7
-        ADDON_LDFLAGS += -lpython2.7
+	ADDON_CFLAGS += -I/usr/include/python2.7
+	ADDON_LDFLAGS += -lpython2.7
 	ADDON_SOURCES_EXCLUDE += src/bindings/desktop/% src/bindings/ios/%
-        ADDON_INCLUDES_EXCLUDE += src/bindings/desktop/% src/bindings/ios/%
-        ADDON_LIBS_EXCLUDE += libs
+	ADDON_INCLUDES_EXCLUDE += src/bindings/desktop/% src/bindings/ios/%
+	ADDON_LIBS_EXCLUDE += libs
+	ADDON_PKG_CONFIG_LIBRARIES = python
 
 vs:
 	ADDON_CFLAGS += -IC:/Python27/include
@@ -94,8 +98,8 @@ vs:
 	ADDON_INCLUDES_EXCLUDE += src/bindings/ios/% src/bindings/linuxarm/%
 
 msys2:
-	ADDON_CFLAGS += -IC:/Python27/include
-	ADDON_LDFLAGS += -LC:/Python27/libs -lpython
+	ADDON_CFLAGS += -I/c/Python27/include -I/c/Python27/libs
+	ADDON_LDFLAGS += -L/c/Python27/libs/python27.lib
 	ADDON_SOURCES_EXCLUDE += src/bindings/ios/% src/bindings/linuxarm/%
 	ADDON_INCLUDES_EXCLUDE += src/bindings/ios/% src/bindings/linuxarm/%
 

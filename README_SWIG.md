@@ -12,7 +12,7 @@ Generating bindings for newer OF versions.
 
         2. install SWIG
         Paste `brew install swig` into Terminal.app and hit enter.
-    
+
     * Linux
     `sudo apt-get install swig`
 
@@ -20,7 +20,3 @@ Generating bindings for newer OF versions.
 Navigate the terminal to the addon folder: `cd /Applications/of_v0.9.8_osx_release/addons/ofxPython`
 And pull the newest version of the swig files
 `(cd swig-of && git pull)`
-
-4. Re-generate bindings
-`./generatebindings.sh`
-generatebindings.sh also makes changes in each of the example folders, making sure they have the needed files.
