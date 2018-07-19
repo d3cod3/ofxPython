@@ -100,8 +100,8 @@ vs:
 msys2:
 	#ADDON_CFLAGS += -I/c/Python27/include -I/c/Python27/libs
 	#ADDON_LDFLAGS += -L/c/Python27/libs/python27.lib
-	ADDON_SOURCES_EXCLUDE += src/bindings/desktop/% src/bindings/ios/% src/bindings/linuxarm/%
-	ADDON_INCLUDES_EXCLUDE += src/bindings/desktop/% src/bindings/ios/% src/bindings/linuxarm/%
+	ADDON_SOURCES_EXCLUDE += src/% src/bindings/desktop/% src/bindings/ios/% src/bindings/linuxarm/%
+	ADDON_INCLUDES_EXCLUDE += src/% src/bindings/desktop/% src/bindings/ios/% src/bindings/linuxarm/%
 
 osx:
 	ADDON_CFLAGS 	+= -I/usr/include/python2.7
