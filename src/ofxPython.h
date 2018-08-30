@@ -54,6 +54,10 @@ public:
 	operator bool() const;
 	const string repr();
 	const string str();
+
+    bool isPythonError(){ return pythonError; }
+    bool pythonError;
+
 protected:
 	void insert_borrowed(PyObject *);
 	void insert_owned(PyObject *);
@@ -93,11 +97,15 @@ public:
     ofxPythonObject getLocals();
     void setVirtualEnv(const string & path);
     void addPath(const string & path);
+    bool isPythonError(){ return pythonError; }
+
+
 protected:
     ofxPythonObject locals;
 	// ofxPythonObject globals;
 	static unsigned int instances;
 	bool initialized;
+    bool pythonError;
     friend class ofxPythonObject::ofxPythonObjectManaged;
 };
 

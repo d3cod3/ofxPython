@@ -12,7 +12,8 @@ unsigned int ofxPython::instances = 0;
 ofxPythonObject make_object_owned(PyObject * obj, bool errcheck);
 
 
-void PythonErrorCheck(){
+bool PythonErrorCheck(){
+    bool isError = false;
 	ofxPythonOperation op;
 	PyObject * ptype, * pvalue, * ptraceback;
 	PyErr_Fetch(&ptype, &pvalue, &ptraceback);
@@ -33,17 +34,19 @@ void PythonErrorCheck(){
 			}
 		}
         ofLog(OF_LOG_ERROR,opvalue.repr());
+        isError = true;
 	}
+    return isError;
 }
 
 ofxPythonObject make_object_owned(PyObject * obj, bool errcheck= true)
 {
 	ofxPythonOperation op;
+    ofxPythonObject o;
 	if (obj==nullptr)
         ofLog(OF_LOG_WARNING,"Make_object_owned: creating ofxPythonObject with nullptr");
 	if(errcheck)
-		PythonErrorCheck();
-	ofxPythonObject o;
+        o.pythonError = PythonErrorCheck();
 	o.insert_owned(obj);
 	return o;
 }
@@ -51,11 +54,11 @@ ofxPythonObject make_object_owned(PyObject * obj, bool errcheck= true)
 ofxPythonObject make_object_borrowed(PyObject * obj, bool errcheck= true)
 {
 	ofxPythonOperation op;
+    ofxPythonObject o;
 	if (obj==nullptr)
         ofLog(OF_LOG_WARNING,"Make_object_borrowed: creating ofxPythonObject with nullptr");
-	if(errcheck)
-		PythonErrorCheck();
-	ofxPythonObject o;
+    if(errcheck)
+        o.pythonError = PythonErrorCheck();
 	o.insert_borrowed(obj);
 	return o;
 }
@@ -115,7 +118,7 @@ int ofxPython::init(){
             init_ofxaddons();
 
             ofxPythonOperation::pstate = PyEval_SaveThread();
-            PythonErrorCheck();
+            pythonError = PythonErrorCheck();
             reset();
             addPath(ofToDataPath(""));
 		}
@@ -136,14 +139,18 @@ void ofxPython::reset(){
 
 void ofxPython::executeScript(const string& path){
 	ofxPythonOperation op;
-	executeString(ofBufferFromFile(path).getText());
-	PythonErrorCheck();
+    pythonError = PythonErrorCheck();
+    if(!pythonError){
+        executeString(ofBufferFromFile(path).getText());
+    }
 }
 
 void ofxPython::executeString(const string& script){
 	ofxPythonOperation op;
-	make_object_owned(PyRun_String(script.c_str(),Py_file_input,locals.data->obj,locals.data->obj));
-	PythonErrorCheck();
+    pythonError = PythonErrorCheck();
+    if(!pythonError){
+        make_object_owned(PyRun_String(script.c_str(),Py_file_input,locals.data->obj,locals.data->obj));
+    }
 }
 
 ofxPythonObject ofxPython::executeStatement(const string& script){
@@ -707,7 +714,7 @@ ofxPythonTupleMaker::operator ofxPythonObject()
 		PyTuple_SetItem(tuple.data->obj,i,contents[i].data->obj);
 		Py_XINCREF(contents[i].data->obj); //finding this one was tricky!
 	}
-	PythonErrorCheck();
+    tuple.pythonError = PythonErrorCheck();
 	return tuple;
 }
 
@@ -727,7 +734,7 @@ ofxPythonListMaker::operator ofxPythonObject()
         PyList_SetItem(list.data->obj,i,contents[i].data->obj);
         Py_XINCREF(contents[i].data->obj); //finding this one was tricky!
     }
-    PythonErrorCheck();
+    list.pythonError = PythonErrorCheck();
     return list;
 }
 
