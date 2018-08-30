@@ -4943,6 +4943,12 @@ def ofVec3f_one():
     return _openframeworks.ofVec3f_one()
 ofVec3f_one = _openframeworks.ofVec3f_one
 
+
+
+# handle typedefs which swig doesn't wrap
+ofPoint = ofVec3f
+
+
 class ofVec4f(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
