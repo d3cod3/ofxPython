@@ -2,10 +2,10 @@
 
 #include "ofxPython.h"
 
-extern "C"{
+/*extern "C"{
     void init_openframeworks();
     void init_ofxaddons();
-}
+}*/
 
 unsigned int ofxPython::instances = 0;
 
@@ -114,8 +114,8 @@ int ofxPython::init(){
 		if(instances == 0){
             PyEval_InitThreads();
 			Py_Initialize();
-            init_openframeworks();
-            init_ofxaddons();
+            //init_openframeworks();
+            //init_ofxaddons();
 
             ofxPythonOperation::pstate = PyEval_SaveThread();
             pythonError = PythonErrorCheck();
