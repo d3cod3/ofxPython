@@ -99,7 +99,7 @@ vs:
 
 msys2:
         ADDON_CFLAGS += -IC:/Python27/include
-        ADDON_LDFLAGS += -LC:/Python27/libs -lpython
+        ADDON_LDFLAGS += -LC:/Python27/libs -lpython27
         ADDON_SOURCES_EXCLUDE += src/bindings/% src/bindings/ios/% src/bindings/linuxarm/%
         ADDON_INCLUDES_EXCLUDE += src/bindings/% src/bindings/ios/% src/bindings/linuxarm/%
 
