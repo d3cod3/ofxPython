@@ -2,11 +2,6 @@
 
 #include "ofxPython.h"
 
-/*extern "C"{
-    void init_openframeworks();
-    void init_ofxaddons();
-}*/
-
 unsigned int ofxPython::instances = 0;
 
 ofxPythonObject make_object_owned(PyObject * obj, bool errcheck);
@@ -114,8 +109,6 @@ int ofxPython::init(){
 		if(instances == 0){
             PyEval_InitThreads();
 			Py_Initialize();
-            //init_openframeworks();
-            //init_ofxaddons();
 
             ofxPythonOperation::pstate = PyEval_SaveThread();
             pythonError = PythonErrorCheck();
