@@ -1,19 +1,21 @@
 #pragma once
+
 #include "ofTypes.h"
 
 extern "C"{
 #include <Python.h>
 }
 
+#include "ofMain.h"
+
 #include <map>
 
-class ofxPythonObjectManaged;
 class ofxPythonMappingValue;
 class ofxPythonAttrValue;
 class ofxPythonTupleMaker;
 class ofxPythonListMaker;
 
-class ofxPythonObject: public ofPtr<ofxPythonObjectManaged>
+class ofxPythonObject
 {
 public:
 	ofxPythonObject method(const string &method_name); //call method without arguments
@@ -21,6 +23,7 @@ public:
 	ofxPythonObject operator ()(ofxPythonObject); //call objects 1 argument
 	ofxPythonObject operator ()(ofxPythonObject, ofxPythonObject); //call objects 2 arguments
 	ofxPythonObject operator ()(ofxPythonObject, ofxPythonObject, ofxPythonObject); //call objects 3 arguments
+    ofxPythonObject operator ()(ofxPythonObject, ofxPythonObject, ofxPythonObject, ofxPythonObject); //call objects 4 arguments
 	ofxPythonAttrValue attr(const string& attribute);
 	ofxPythonMappingValue operator [](const string& key);
 	ofxPythonMappingValue operator [](const char * key);
@@ -51,12 +54,28 @@ public:
 	operator bool() const;
 	const string repr();
 	const string str();
+
+    bool isPythonError(){ return pythonError; }
+    bool pythonError;
+
 protected:
 	void insert_borrowed(PyObject *);
 	void insert_owned(PyObject *);
-	friend ofxPythonObject make_object_owned(PyObject * obj, bool);
-	friend ofxPythonObject make_object_borrowed(PyObject * obj, bool);
-	friend class ofxPython;
+    class ofxPythonObjectManaged
+    {
+    public:
+        ofxPythonObjectManaged(PyObject*);
+        ~ofxPythonObjectManaged();
+        PyObject * obj;
+    };
+    ofPtr<ofxPythonObjectManaged> data;
+    friend class ofxPython;
+    friend class ofxPythonMappingValue;
+    friend class ofxPythonAttrValue;
+    friend class ofxPythonListMaker;
+    friend class ofxPythonTupleMaker;
+    friend ofxPythonObject make_object_owned(PyObject * obj, bool);
+    friend ofxPythonObject make_object_borrowed(PyObject * obj, bool);
 };
 
 class ofxPython
@@ -78,12 +97,16 @@ public:
     ofxPythonObject getLocals();
     void setVirtualEnv(const string & path);
     void addPath(const string & path);
+    bool isPythonError(){ return pythonError; }
+
+
 protected:
     ofxPythonObject locals;
 	// ofxPythonObject globals;
 	static unsigned int instances;
 	bool initialized;
-	friend class ofxPythonObjectManaged;
+    bool pythonError;
+    friend class ofxPythonObject::ofxPythonObjectManaged;
 };
 
 class ofxPythonOperation
@@ -95,13 +118,6 @@ public:
     ~ofxPythonOperation();
 };
 
-class ofxPythonObjectManaged
-{
-public:
-	ofxPythonObjectManaged(PyObject*);
-	~ofxPythonObjectManaged();
-	PyObject * obj;
-};
 
 class ofxPythonObjectLike
 {
@@ -111,6 +127,7 @@ public:
 	ofxPythonObject operator ()(ofxPythonObject); //call objects 1 argument
 	ofxPythonObject operator ()(ofxPythonObject, ofxPythonObject); //call objects 2 arguments
 	ofxPythonObject operator ()(ofxPythonObject, ofxPythonObject, ofxPythonObject); //call objects 3 arguments
+    ofxPythonObject operator ()(ofxPythonObject, ofxPythonObject, ofxPythonObject, ofxPythonObject); //call objects 4 arguments
 	ofxPythonAttrValue attr(const string& attribute);
 	ofxPythonMappingValue operator [](const string& key);
 	ofxPythonMappingValue operator [](const char * key);
