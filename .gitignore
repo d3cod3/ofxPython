@@ -89,3 +89,7 @@ Desktop.ini
 *.log
 *.sql
 *.sqlite
+
+build-example_ofxPython-Desktop-Debug/*
+build-example_ofxPython-Desktop-Release/*
+example_ofxPython/example_ofxPython.qbs.user
