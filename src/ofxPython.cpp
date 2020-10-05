@@ -107,8 +107,9 @@ int ofxPython::init(){
 	if (!initialized){
 		initialized = true;
 		if(instances == 0){
-            PyEval_InitThreads();
+
 			Py_Initialize();
+            PyEval_InitThreads();
 
             ofxPythonOperation::pstate = PyEval_SaveThread();
             pythonError = PythonErrorCheck();
@@ -291,9 +292,12 @@ ofxPythonAttrValue ofxPythonObject::attr(const string& attribute)
 const string ofxPythonObject::repr()
 {
 	ofxPythonOperation op;
-	ofxPythonObject objectsRepresentation = make_object_owned(
-		PyObject_Repr(data->obj));
-	string s = string(PyString_AsString(objectsRepresentation.data->obj));
+	ofxPythonObject objectsRepresentation = make_object_owned(PyObject_Repr(data->obj));
+#ifdef TARGET_LINUX
+    string s = string(_PyUnicode_AsString(objectsRepresentation.data->obj));
+#else
+    string s = string(PyString_AsString(objectsRepresentation.data->obj));
+#endif
 	PythonErrorCheck();
 	return s;
 }
@@ -301,9 +305,12 @@ const string ofxPythonObject::repr()
 const string ofxPythonObject::str()
 {
 	ofxPythonOperation op;
-	ofxPythonObject objectsRepresentation = make_object_owned(
-		PyObject_Str(data->obj));
-	string s = string(PyString_AsString(objectsRepresentation.data->obj));
+	ofxPythonObject objectsRepresentation = make_object_owned(PyObject_Str(data->obj));
+#ifdef TARGET_LINUX
+    string s = string(_PyUnicode_AsString(objectsRepresentation.data->obj));
+#else
+    string s = string(PyString_AsString(objectsRepresentation.data->obj));
+#endif
 	PythonErrorCheck();
 	return s;
 }
@@ -329,7 +336,12 @@ bool ofxPythonObject::isBool() const
 bool ofxPythonObject::isInt() const
 {
 	ofxPythonOperation op;
-	return data && (PyInt_Check(data->obj) || PyLong_Check(data->obj));
+#ifdef TARGET_LINUX
+    return data && (PyLong_Check(data->obj));
+#else
+    return data && (PyInt_Check(data->obj) || PyLong_Check(data->obj));
+#endif
+
 }
 
 bool ofxPythonObject::isFloat() const
@@ -341,7 +353,11 @@ bool ofxPythonObject::isFloat() const
 bool ofxPythonObject::isString() const
 {
 	ofxPythonOperation op;
-	return data && PyString_Check(data->obj);
+#ifdef TARGET_LINUX
+    return data && PyUnicode_Check(data->obj);
+#else
+    return data && PyString_Check(data->obj);
+#endif
 }
 
 bool ofxPythonObject::isList() const
@@ -365,10 +381,14 @@ bool ofxPythonObject::isDict() const
 long int ofxPythonObject::asInt() const
 {
 	ofxPythonOperation op;
-	if (PyInt_Check(data->obj))
-		return PyInt_AsLong(data->obj);
+#ifdef TARGET_LINUX
+    if(PyLong_Check(data->obj)) return PyLong_AsLong(data->obj);
+#else
+    if (PyInt_Check(data->obj))
+        return PyInt_AsLong(data->obj);
     else if(PyLong_Check(data->obj))
         return PyLong_AsLong(data->obj);
+#endif
 	return 0;
 }
 
@@ -391,8 +411,11 @@ double ofxPythonObject::asFloat() const
 string ofxPythonObject::asString() const
 {
 	ofxPythonOperation op;
-	if(isString())
-		return string(PyString_AsString(data->obj));
+#ifdef TARGET_LINUX
+    if(isString()) return string(_PyUnicode_AsString(data->obj));
+#else
+    if(isString()) return string(PyString_AsString(data->obj));
+#endif
 	return string();
 }
 
@@ -439,7 +462,12 @@ std::map<ofxPythonObject,ofxPythonObject> ofxPythonObject::asMap() const
 ofxPythonObject ofxPythonObject::fromInt(long int i)
 {
 	ofxPythonOperation op;
-	return make_object_owned(PyInt_FromLong(i));
+#ifdef TARGET_LINUX
+    return make_object_owned(PyLong_FromLong(i));
+#else
+    return make_object_owned(PyInt_FromLong(i));
+#endif
+
 }
 
 ofxPythonObject ofxPythonObject::fromBool(bool b)
@@ -465,7 +493,12 @@ ofxPythonObject ofxPythonObject::fromFloat(double d)
 ofxPythonObject ofxPythonObject::fromString(const string& s)
 {
 	ofxPythonOperation op;
-	return make_object_owned(PyString_FromString(s.c_str()));
+#ifdef TARGET_LINUX
+    return make_object_owned(PyUnicode_FromString(s.c_str()));
+#else
+    return make_object_owned(PyString_FromString(s.c_str()));
+#endif
+
 }
 
 ofxPythonTupleMaker ofxPythonObject::makeTuple()

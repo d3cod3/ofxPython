@@ -62,14 +62,14 @@ common:
 	# ADDON_LIBS_EXCLUDE =
 
 linux64:
-	ADDON_CFLAGS += -I/usr/include/python2.7
-	ADDON_LDFLAGS += -lpython2.7
-	ADDON_PKG_CONFIG_LIBRARIES = python
+        ADDON_CFLAGS += -I/usr/include/python3.8
+        ADDON_LDFLAGS += -lpython3.8
+        ADDON_PKG_CONFIG_LIBRARIES = python3
 
 linux:
-	ADDON_CFLAGS += -I/usr/include/python2.7
-	ADDON_LDFLAGS += -lpython2.7
-	ADDON_PKG_CONFIG_LIBRARIES = python
+        ADDON_CFLAGS += -I/usr/include/python3.8
+        ADDON_LDFLAGS += -lpython3.8
+        ADDON_PKG_CONFIG_LIBRARIES = python3
 
 msys2:
         ADDON_CFLAGS += -IC:/Python27/include
